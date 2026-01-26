@@ -20,9 +20,13 @@
     },
     "dependencies": {
         "alpinejs": "^3.15.0",
+<<<<<<< HEAD
         "build": "^0.1.4",
         "flowbite": "^3.1.2",
         "npm": "^11.7.0",
         "run": "^1.5.0"
+=======
+        "flowbite": "^3.1.2"
+>>>>>>> 4ebee93 (Add automated test for user self-delete restriction)
     }
 }

@@ -14,7 +14,10 @@
     <div class="space-y-4">
 
       <div class="grid lg:grid-cols-2 gap-4">
+<<<<<<< HEAD
 ">
+=======
+>>>>>>> 4ebee93 (Add automated test for user self-delete restriction)
       <x-wire-input
         name="name"
         label="Nombre"

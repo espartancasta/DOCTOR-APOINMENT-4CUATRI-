@@ -22,6 +22,10 @@
         <!-- Scripts principales -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://kit.fontawesome.com/a7de8752fc.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+=======
+        {{--sweetalert2 --}}
+>>>>>>> 4ebee93 (Add automated test for user self-delete restriction)
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- ✅ WireUI Styles --}}

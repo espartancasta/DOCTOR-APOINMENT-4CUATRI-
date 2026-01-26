@@ -16,7 +16,11 @@
                     @endisset
                 </li>
             @endforeach
+<<<<<<< HEAD
         </ol>
+=======
+        </ol>z
+>>>>>>> 4ebee93 (Add automated test for user self-delete restriction)
 
         @if (count($breadcrumbs) > 1)
             <h6 class="font-bold mt-2">

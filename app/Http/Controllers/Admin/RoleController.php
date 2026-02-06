@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
-
 class RoleController extends Controller
 {
     /**
@@ -30,31 +29,27 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //validar que se cree bien
         $request->validate([
-            'name' => 'required|unique:roles,name']);
+            'name' => 'required|unique:roles,name',
+        ]);
 
-        //si pasa la validadion, crear el rol
-        Role::create(['name' => $request->name]);   
+        Role::create(['name' => $request->name]);
 
-        //variable de un solo uso para alerta
-        session()->flash('swal',
-         [
-            'icon' => 'success',
-            'title' => 'Role creado correctamente',
-            'text' => 'El rol ha sido creado exitosamente'
-         ]);
+        session()->flash('swal', [
+            'icon'  => 'success',
+            'title' => 'Rol creado correctamente',
+            'text'  => 'El rol ha sido creado exitosamente',
+        ]);
 
-        //Redirecionara a la tabla principal de roles
-        return redirect()->route('admin.roles.index')->with('success', 'Role created successfully.');
+        return redirect()->route('admin.roles.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Role $role)
     {
-        //
+        return view('admin.roles.show', compact('role'));
     }
 
     /**
@@ -62,16 +57,17 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //Restringir la accion para los primeros 4 roles 
-         if ($role->id <= 4) {
-            session()->flash('swal',
-             [
-                'icon' => 'error',
+        // Restringir la acción para los primeros 4 roles
+        if ($role->id <= 4) {
+            session()->flash('swal', [
+                'icon'  => 'error',
                 'title' => 'Error',
-                'text' => 'No puedes editar este role'
-             ]);
+                'text'  => 'No puedes editar este rol',
+            ]);
+
             return redirect()->route('admin.roles.index');
         }
+
         return view('admin.roles.edit', compact('role'));
     }
 
@@ -80,63 +76,57 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //validar que se cree bien
         $request->validate([
-        'name' => 'required|unique:roles,name,' . $role->id]);
+            'name' => 'required|unique:roles,name,' . $role->id,
+        ]);
 
-        //si el campo no cambio, no actualices
+        // Si el campo no cambió, no actualices
         if ($role->name === $request->name) {
-             session()->flash('swal',
-         [
-            'icon' => 'info',
-            'title' => 'sin cambios',
-            'text' => 'no se detectaron modificaciones'
-         ]);
-            return redirect()->route('admin.roles.edit',  $role);
+            session()->flash('swal', [
+                'icon'  => 'info',
+                'title' => 'Sin cambios',
+                'text'  => 'No se detectaron modificaciones',
+            ]);
+
+            return redirect()->route('admin.roles.edit', $role);
         }
 
-        //si pasa la validadion, crear el rol
         $role->update(['name' => $request->name]);
 
-        //variable de un solo uso para alerta
-        session()->flash('swal',
-         [
-            'icon' => 'success',
-            'title' => 'Role creado correctamente',
-            'text' => 'El rol ha sido actualizado exitosamente'
-         ]);
+        session()->flash('swal', [
+            'icon'  => 'success',
+            'title' => 'Rol actualizado correctamente',
+            'text'  => 'El rol ha sido actualizado exitosamente',
+        ]);
 
-        //Redirecionara a la tabla principal de roles
-        return redirect()->route('admin.roles.index',  $role);
-    } 
+        return redirect()->route('admin.roles.index');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Role $role)
     {
-        //Restringit el acceso si el rol tiene usuarios asociados
-         if ($role->id <= 4) {
-            session()->flash('swal',
-             [
-                'icon' => 'error',
+        // Restringir eliminación para los primeros 4 roles
+        if ($role->id <= 4) {
+            session()->flash('swal', [
+                'icon'  => 'error',
                 'title' => 'No se puede eliminar el rol',
-                'text' => 'El rol tiene usuarios asociados y no puede ser eliminado'
-             ]);
+                'text'  => 'Este rol está protegido y no puede ser eliminado',
+            ]);
+
             return redirect()->route('admin.roles.index');
         }
-        //Borrar rol
+
+        $roleName = $role->name;
         $role->delete();
 
-        //Alertar
-        session()->flash('swal',
-         [
-            'icon' => 'success',
-            'title' => 'Role eliminado correctamente',
-            'text' => 'El rol . }' . $role->name . ' ha sido eliminado exitosamente'
-         ]);
+        session()->flash('swal', [
+            'icon'  => 'success',
+            'title' => 'Rol eliminado correctamente',
+            'text'  => 'El rol ' . $roleName . ' ha sido eliminado exitosamente',
+        ]);
 
-        //Redireccionar
         return redirect()->route('admin.roles.index');
     }
 }

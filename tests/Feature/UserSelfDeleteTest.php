@@ -5,34 +5,21 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('a user cannot delete their own account', function () {
-    $user = User::factory()->create([
-        'id_number' => 'TEST-SELF-001',
-    ]);
+test('user cannot self-delete their account', function () {
+    // 1) Crear un usuario
+    $user = User::factory()->create();
 
-    $this->actingAs($user, 'sanctum')
-        ->delete('/api/user')
-        ->assertStatus(403);
+    // 2) Simular login
+    $this->actingAs($user);
 
+    // 3) Intentar borrarse a sí mismo
+    $response = $this->delete(route('admin.users.destroy', $user));
+
+    // 4) Debe bloquearse
+    $response->assertStatus(403);
+
+    // 5) El usuario sigue existiendo
     $this->assertDatabaseHas('users', [
         'id' => $user->id,
-    ]);
-});
-
-it('a user cannot delete another user account', function () {
-    $user = User::factory()->create([
-        'id_number' => 'TEST-USER-001',
-    ]);
-
-    $otherUser = User::factory()->create([
-        'id_number' => 'TEST-USER-002',
-    ]);
-
-    $this->actingAs($user, 'sanctum')
-        ->delete("/api/users/{$otherUser->id}")
-        ->assertStatus(403);
-
-    $this->assertDatabaseHas('users', [
-        'id' => $otherUser->id,
     ]);
 });

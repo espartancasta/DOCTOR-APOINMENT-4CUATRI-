@@ -5,15 +5,16 @@ namespace App\Livewire\Admin\Datatables;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Patient;
-Use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class PatientTable extends DataTableComponent
 {
-   // protected $model = Patient::class;
-    public function builder()
+    //protected $model = Patient::class;
+
+    public function builder(): Builder
     {
-        return Patient::query()
-            ->with('user', );
+        return Patient::query()->with('user');
     }
 
     public function configure(): void
@@ -25,20 +26,24 @@ class PatientTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
+            ->sortable(),
+            
             Column::make("Nombre", "user.name")
-                ->sortable(),
+            ->sortable(),
+            
             Column::make("Email", "user.email")
-                ->sortable(),
-            Column::make("Numero de id", "user.id_number")
-                ->sortable(),
-            Column::make("telefono", "user.phone")
-                ->sortable(),
-              Column::make('Acciones')
+            ->sortable(),
+            
+            Column::make("Número de id", "user.id_number")
+            ->sortable(),
+            
+            Column::make("Teléfono", "user.phone")
+            ->sortable(),
+
+            Column::make('Acciones')
                 ->label(function ($row) {
                     return view('admin.patients.actions', 
                     ['patient' => $row]);}),
-            
-        ];
+            ];
     }
 }

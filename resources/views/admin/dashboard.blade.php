@@ -12,5 +12,5 @@
     ],
     
 ]">
-    Hola, desde admin Pedriini
+    Hola, desde admin Artisan SERVE
 </x-admin-layout>

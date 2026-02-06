@@ -12,7 +12,7 @@
 
         <title>{{ $title }}</title>
 
-        <!-- Fonts -->  
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -22,14 +22,11 @@
         <!-- Scripts principales -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://kit.fontawesome.com/a7de8752fc.js" crossorigin="anonymous"></script>
-<<<<<<< HEAD
-=======
-        {{--sweetalert2 --}}
->>>>>>> 4ebee93 (Add automated test for user self-delete restriction)
+
+        {{-- sweetalert2 --}}
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- ✅ WireUI Styles --}}
-
     </head>
 
     <body class="font-sans antialiased bg-gray-50">
@@ -43,10 +40,10 @@
             <!-- Margin top 14px -->
             <div class="mt-14 flex items-center justify-between w-full">
                 @include('layouts.includes.admin.breadcrumb', ['breadcrumbs' => $breadcrumbs ?? []])
-                @isset($action)
-                {{ $action }}
-                @endisset
 
+                @isset($action)
+                    {{ $action }}
+                @endisset
             </div>
 
             {{-- Contenido dinámico de cada vista --}}
@@ -62,33 +59,34 @@
         @wireUiScripts
         @livewireScripts
 
-        {{--Mostrar Sweet Alert--}}
+        {{-- Mostrar Sweet Alert --}}
         @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
+
         <script>
-        Swal.fire(@json(session('swal')));
-    </script>
-    @endif
-    <script>
-        forms = document.querySelectorAll('.delete-form');
-        forms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¡No podrás revertir esto!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
+            forms = document.querySelectorAll('.delete-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡No podrás revertir esto!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
     </body>
 </html>

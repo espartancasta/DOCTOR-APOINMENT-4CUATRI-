@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
 
         // Crear/actualizar un usuario de prueba
         $user = User::updateOrCreate(
-            ['email' => 'joel.diaz.lopez7@gmail.com'],
+            ['email' => 'enriquecastayucatan@gmail.com'],
             [
-                'name' => 'Pedro',
+                'name' => 'Jose',
                 'password' => Hash::make('12345678'),
                 'id_number' => '12345678',
                 'phone' => '5551234',

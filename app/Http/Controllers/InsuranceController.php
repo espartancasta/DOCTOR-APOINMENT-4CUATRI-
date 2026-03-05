@@ -29,6 +29,6 @@ class InsuranceController extends Controller
 
         Insurance::create($validated);
 
-        return redirect()->route('insurances.index')->with('success', 'Aseguradora registrada exitosamente.');
+        return redirect()->route('admin.insurances.index')->with('success', 'Aseguradora registrada exitosamente.');
     }
 }

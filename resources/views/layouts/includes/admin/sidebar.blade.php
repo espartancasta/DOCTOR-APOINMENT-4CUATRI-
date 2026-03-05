@@ -28,6 +28,12 @@ $links = [
         'href' => route('admin.patients.index'),
         'active' => request()->routeIs('admin.patients.*'),
     ],
+    [
+        'name' => 'Aseguradoras',
+        'icon' => 'fa-solid fa-briefcase-medical',
+        'href' => route('admin.insurances.index'),
+        'active' => request()->routeIs('admin.insurances.*'),
+    ],
 ];
 @endphp
 

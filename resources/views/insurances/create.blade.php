@@ -5,7 +5,7 @@
     ],
     [
         'name' => 'Aseguradoras',
-        'href' => route('insurances.index'),
+        'href' => route('admin.insurances.index'),
     ],
     [
         'name' => 'Nueva Aseguradora',
@@ -15,7 +15,7 @@
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Registrar Aseguradora</h2>
         <p class="text-gray-500 mb-6">Complete la información de la nueva aseguradora para agregarla al directorio médico.</p>
 
-        <form action="{{ route('insurances.store') }}" method="POST">
+        <form action="{{ route('admin.insurances.store') }}" method="POST">
             @csrf
             
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex items-center justify-end space-x-3 mt-8">
-                <a href="{{ route('insurances.index') }}" class="text-gray-700 bg-white border border-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-100 hover:bg-gray-50 font-medium rounded-lg text-sm px-5 py-2.5 focus:z-10">
+                <a href="{{ route('admin.insurances.index') }}" class="text-gray-700 bg-white border border-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-100 hover:bg-gray-50 font-medium rounded-lg text-sm px-5 py-2.5 focus:z-10">
                     Cancelar
                 </a>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">

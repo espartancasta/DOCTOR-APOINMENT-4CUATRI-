@@ -9,7 +9,7 @@
 ]">
     <div class="mb-4 flex items-center justify-between">
         <h2 class="text-2xl font-bold text-gray-800">Aseguradoras</h2>
-        <a href="{{ route('insurances.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 outline-none">
+        <a href="{{ route('admin.insurances.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 outline-none">
             Nueva Aseguradora
         </a>
     </div>

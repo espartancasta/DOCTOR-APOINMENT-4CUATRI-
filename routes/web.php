@@ -14,6 +14,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('admin.dashboard'); // vista en resources/views/admin/dashboard.blade.php
     })->name('dashboard');
-
     Route::resource('insurances', \App\Http\Controllers\InsuranceController::class);
 });

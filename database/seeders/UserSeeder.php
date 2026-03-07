@@ -11,13 +11,13 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Asegurar que el rol exista
+        // Makes sure the role exists
         Role::firstOrCreate([
             'name' => 'doctor',
             'guard_name' => 'web',
         ]);
 
-        // Crear/actualizar un usuario de prueba
+        // Create/update a test user
         $user = User::updateOrCreate(
             ['email' => 'enriquecastayucatan@gmail.com'],
             [
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // Asignarle rol (Spatie)
+        // Assign role (Spatie)
         $user->syncRoles(['doctor']);
     }
 }

@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // Asignar rol (Spatie)
+        // Asignarle rol (Spatie)
         $user->syncRoles(['doctor']);
     }
 }

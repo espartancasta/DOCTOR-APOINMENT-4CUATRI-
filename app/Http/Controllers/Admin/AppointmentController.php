@@ -46,7 +46,16 @@ class AppointmentController extends Controller
             'reason' => 'required|string',
         ]);
 
-        Appointment::create($data);
+        $appointment = Appointment::create($data);
+
+        // Enviar correos
+        try {
+            \Illuminate\Support\Facades\Mail::to($appointment->patient->user->email)->send(new \App\Mail\AppointmentMail($appointment));
+            \Illuminate\Support\Facades\Mail::to($appointment->doctor->email)->send(new \App\Mail\AppointmentMail($appointment));
+        } catch (\Exception $e) {
+            // Log error or handle gracefully
+            \Illuminate\Support\Facades\Log::error("Error enviando correos de cita: " . $e->getMessage());
+        }
 
         session()->flash('swal', [
             'icon' => 'success',

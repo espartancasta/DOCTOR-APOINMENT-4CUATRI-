@@ -5,6 +5,11 @@ use App\Models\User;
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
 
+    if ($response->status() !== 200) {
+        dump($response->status());
+        dump($response->headers->get('Location'));
+    }
+
     $response->assertStatus(200);
 });
 
@@ -17,7 +22,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect('/admin');
 });
 
 test('users cannot authenticate with invalid password', function () {

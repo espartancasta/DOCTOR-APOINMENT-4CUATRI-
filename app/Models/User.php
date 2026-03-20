@@ -76,4 +76,10 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', $name)->exists();
     }
+
+    // --- Relaciones del módulo Citas ---
+    public function appointmentsAsDoctor()
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
 }

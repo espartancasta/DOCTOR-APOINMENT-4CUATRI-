@@ -5,6 +5,11 @@ use App\Models\User;
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
 
+    if ($response->status() !== 200) {
+        dump($response->status());
+        dump($response->headers->get('Location'));
+    }
+
     $response->assertStatus(200);
 });
 
